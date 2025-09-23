@@ -24,13 +24,15 @@ public class Donacion {
     @Column(name = "estado_Donacion", nullable = false)
     private int estado_Donacion;
 
+    @Column(name = "direccion", nullable = true)
+    private String direccion;
+
     @ManyToOne
     @JoinColumn(name = "UsuarioId", nullable = false)
     private Usuario usuarioId;
 
-    @ManyToOne
-    @JoinColumn(name = "CategoriaId", nullable = false)
-    private Categoria categoriaId;
+    @Column(name = "CategoriaId", nullable = false)
+    private int categoriaId;
 
     @ManyToOne
     @JoinColumn(name = "PeticionId", nullable = false)
@@ -39,14 +41,23 @@ public class Donacion {
     public Donacion() {}
 
     public Donacion(String desc_Donacion, int cantidad_Donacion, LocalDate fecha_Donacion,
-        int estado_Donacion, Usuario usuarioId, Categoria categoriaId, Peticion peticionId) {
+        int estado_Donacion, String direccion, Usuario usuarioId, int categoriaId, Peticion peticionId) {
         this.desc_Donacion = desc_Donacion;
         this.cantidad_Donacion = cantidad_Donacion;
         this.fecha_Donacion = fecha_Donacion;
         this.estado_Donacion = estado_Donacion;
+        this.direccion = direccion;
         this.usuarioId = usuarioId;
         this.categoriaId = categoriaId;
         this.peticionId = peticionId;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public int getId_Donacion() {
@@ -97,11 +108,11 @@ public class Donacion {
         this.usuarioId = usuarioId;
     }
 
-    public Categoria getCategoriaId() {
+    public int getCategoriaId() {
         return categoriaId;
     }
 
-    public void setCategoriaId(Categoria categoriaId) {
+    public void setCategoriaId(int categoriaId) {
         this.categoriaId = categoriaId;
     }
 

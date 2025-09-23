@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import co.edu.ue.entity.Peticion;
 import co.edu.ue.entity.Usuario;
 import co.edu.ue.service.IPeticionService;
@@ -42,13 +41,20 @@ public class PeticionController {
         return new ResponseEntity<>(listPeticion, headers, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/actualizar")
-    public ResponseEntity<Peticion> putUser(@RequestBody Peticion peticion) {
-        Peticion actualizado = service.ActualizarPeticion(peticion);
-        if (actualizado != null) {
-            return new ResponseEntity<>(actualizado, HttpStatus.ACCEPTED);
+    @PutMapping(value = "/actualizar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Peticion> actualizarPeticion(@RequestBody Peticion peticion) {
+
+        Peticion existente = service.BuscarID(peticion.getId_peticion());
+        if (existente == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        if (peticion.getUsuario() == null) {
+            peticion.setUsuario(existente.getUsuario());
+        }
+
+        Peticion actualizado = service.ActualizarPeticion(peticion);
+        return new ResponseEntity<>(actualizado, HttpStatus.ACCEPTED);
     }
 
     @GetMapping(value = "/id")

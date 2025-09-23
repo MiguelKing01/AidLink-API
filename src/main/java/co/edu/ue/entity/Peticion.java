@@ -2,8 +2,6 @@ package co.edu.ue.entity;
 
 import java.sql.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,112 +13,69 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Peticion")
-// @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Peticion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_peticion", nullable = false)
-    private Integer id_Peticion;
+    private Integer id_peticion;
 
-    @Column(name = "nombre_Peticion", nullable = false, length = 50)
-    private String nombre_Peticion;
+    @Column(name = "nombre_peticion", nullable = false, length = 50)
+    private String nombre_peticion;
 
-    @Column(name = "desc_Peticion", nullable = false, length = 100)
-    private String desc_Peticion;
+    @Column(name = "desc_peticion", nullable = false, length = 100)
+    private String desc_peticion;
 
-    @Column(name = "cantidad_Peticion", nullable = false)
-    private int cantidad_Peticion;
+    @Column(name = "cantidad_peticion", nullable = false)
+    private int cantidad_peticion;
 
-    @Column(name = "fecha_Peticion", nullable = false)
-    private Date fecha_Peticion;
+    @Column(name = "fecha_peticion", nullable = false)
+    private Date fecha_peticion;
 
-    @Column(name = "estado_Peticion", nullable = false)
-    private int estado_Peticion;
+    @Column(name = "estado_peticion", nullable = false)
+    private int estado_peticion;
+
+    @Column(name = "direccion", nullable = true)
+    private String direccion;
+
+    @Column(name = "nequi", nullable = false)
+    private String nequi;
 
     @ManyToOne
     @JoinColumn(name = "UsuarioId", nullable = false)
-    private Usuario usuario;
+    private Usuario usuario; // ⚡ Cambiado a 'usuario'
 
-    @ManyToOne
-    @JoinColumn(name = "CategoriaId", nullable = false)
-    private Categoria categoria;
+    @Column(name = "CategoriaId", nullable = false)
+    private int categoriaId;
 
-    public Peticion() {
-    }
+    // Getters y setters
+    public Integer getId_peticion() { return id_peticion; }
+    public void setId_peticion(Integer id_peticion) { this.id_peticion = id_peticion; }
 
-    public Peticion(String nombre_Peticion, String desc_Peticion, int cantidad_Peticion, Date fecha_Peticion,
-            int estado_Peticion, Usuario usuario, Categoria categoria) {
-        this.nombre_Peticion = nombre_Peticion;
-        this.desc_Peticion = desc_Peticion;
-        this.cantidad_Peticion = cantidad_Peticion;
-        this.fecha_Peticion = fecha_Peticion;
-        this.estado_Peticion = estado_Peticion;
-        this.usuario = usuario;
-        this.categoria = categoria;
-    }
+    public String getNombre_peticion() { return nombre_peticion; }
+    public void setNombre_peticion(String nombre_peticion) { this.nombre_peticion = nombre_peticion; }
 
-    public Integer getId_peticion() {
-        return id_Peticion;
-    }
+    public String getDesc_peticion() { return desc_peticion; }
+    public void setDesc_peticion(String desc_peticion) { this.desc_peticion = desc_peticion; }
 
-    public void setId_peticion(Integer id_peticion) {
-        this.id_Peticion = id_peticion;
-    }
+    public int getCantidad_peticion() { return cantidad_peticion; }
+    public void setCantidad_peticion(int cantidad_peticion) { this.cantidad_peticion = cantidad_peticion; }
 
-    public String getNombre_peticion() {
-        return nombre_Peticion;
-    }
+    public Date getFecha_peticion() { return fecha_peticion; }
+    public void setFecha_peticion(Date fecha_peticion) { this.fecha_peticion = fecha_peticion; }
 
-    public void setNombre_peticion(String nombre_Peticion) {
-        this.nombre_Peticion = nombre_Peticion;
-    }
+    public int getEstado_peticion() { return estado_peticion; }
+    public void setEstado_peticion(int estado_peticion) { this.estado_peticion = estado_peticion; }
 
-    public String getDesc_peticion() {
-        return desc_Peticion;
-    }
+    public String getDireccion() { return direccion; }
+    public void setDireccion(String direccion) { this.direccion = direccion; }
 
-    public void setDesc_peticion(String desc_Peticion) {
-        this.desc_Peticion = desc_Peticion;
-    }
+    public String getNequi() { return nequi; }
+    public void setNequi(String nequi) { this.nequi = nequi; }
 
-    public int getCantidad_peticion() {
-        return cantidad_Peticion;
-    }
+    public Usuario getUsuario() { return usuario; }
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
 
-    public void setCantidad_peticion(int cantidad_Peticion) {
-        this.cantidad_Peticion = cantidad_Peticion;
-    }
-
-    public Date getFecha_peticion() {
-        return fecha_Peticion;
-    }
-
-    public void setFecha_peticion(Date fecha_Peticion) {
-        this.fecha_Peticion = fecha_Peticion;
-    }
-
-    public int getEstado_peticion() {
-        return estado_Peticion;
-    }
-
-    public void setEstado_peticion(int estado_Peticion) {
-        this.estado_Peticion = estado_Peticion;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
+    public int getCategoriaId() { return categoriaId; }
+    public void setCategoriaId(int categoriaId) { this.categoriaId = categoriaId; }
 }
