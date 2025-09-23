@@ -11,4 +11,5 @@ import co.edu.ue.entity.Usuario;
 public interface IPeticionJPA extends JpaRepository<Peticion, Integer> {
 
     List<Peticion> findByUsuario(Usuario usuarioId);
+    //FuncionaGitHub
 }
